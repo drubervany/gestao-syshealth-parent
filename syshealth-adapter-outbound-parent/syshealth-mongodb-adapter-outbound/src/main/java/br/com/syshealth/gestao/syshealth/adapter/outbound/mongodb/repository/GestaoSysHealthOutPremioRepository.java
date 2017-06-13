@@ -9,5 +9,4 @@ public interface GestaoSysHealthOutPremioRepository extends MongoRepository<Gest
 
     @Query(value = "{'premio.competencia': ?0}")
     GestaoSysHealthPremioEntity find(Integer competencia);
-
 }

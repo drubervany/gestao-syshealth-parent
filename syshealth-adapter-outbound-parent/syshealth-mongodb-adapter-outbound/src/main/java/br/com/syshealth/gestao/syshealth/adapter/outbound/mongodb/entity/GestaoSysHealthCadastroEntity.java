@@ -5,8 +5,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import com.google.gson.GsonBuilder;
 import com.querydsl.core.annotations.QueryEntity;
 
-import br.com.syshealth.commons.dto.Cadastro;
-import br.com.syshealth.commons.dto.EmpresaCadastro;
+import br.com.syshealth.commons.dto.Empresa;
+import br.com.syshealth.commons.dto.Segurado;
+import br.com.syshealth.commons.dto.SubEmpresa;
 import br.com.syshealth.commons.utils.Sistema;
 
 @QueryEntity
@@ -17,15 +18,11 @@ public class GestaoSysHealthCadastroEntity {
 
     private Integer competencia;
 
-    private EmpresaCadastro empresa;
+    private Empresa empresa;
 
-    public GestaoSysHealthCadastroEntity() {
-    }
+    private SubEmpresa subEmpresa;
 
-    public GestaoSysHealthCadastroEntity(Cadastro cadastro) {
-        this.competencia = cadastro.getCompetencia();
-        this.empresa = cadastro.getEmpresa();
-    }
+    private Segurado segurado;
 
     public String getId() {
         return id;
@@ -43,11 +40,11 @@ public class GestaoSysHealthCadastroEntity {
         this.competencia = competencia;
     }
 
-    public EmpresaCadastro getEmpresa() {
+    public Empresa getEmpresa() {
         return empresa;
     }
 
-    public void setEmpresa(EmpresaCadastro empresa) {
+    public void setEmpresa(Empresa empresa) {
         this.empresa = empresa;
     }
 
@@ -58,5 +55,21 @@ public class GestaoSysHealthCadastroEntity {
     public static GestaoSysHealthCadastroEntity fromJson(String json) {
         return new GsonBuilder().setDateFormat(Sistema.FORMATO_DATA.getValue()).create().fromJson(json,
                 GestaoSysHealthCadastroEntity.class);
+    }
+
+    public SubEmpresa getSubEmpresa() {
+        return subEmpresa;
+    }
+
+    public void setSubEmpresa(SubEmpresa subEmpresa) {
+        this.subEmpresa = subEmpresa;
+    }
+
+    public Segurado getSegurado() {
+        return segurado;
+    }
+
+    public void setSegurado(Segurado segurado) {
+        this.segurado = segurado;
     }
 }

@@ -38,12 +38,8 @@ public class GestaoSysHealthOutMongodbServiceHandler implements GestaoSysHealthO
     public void salvar(Premio premio) {
         log.info("salvar premio");
 
-        repositoryPremio.save(new GestaoSysHealthPremioEntity(premio));
-        GestaoSysHealthPremioEntity entity = repositoryPremio.find(premio.getCompetencia());
-        if (entity != null)
-            entity.setEmpresa(premio.getEmpresa());
-
-        repositoryPremio.save(new GestaoSysHealthPremioEntity(premio));
+        GestaoSysHealthPremioEntity dto = GestaoSysHealthPremioEntity.fromJson(premio.toJson());
+        repositoryPremio.save(dto);
 
         log.info("premio salvo!");
     }
@@ -52,11 +48,8 @@ public class GestaoSysHealthOutMongodbServiceHandler implements GestaoSysHealthO
     public void salvar(Cadastro cadastro) {
         log.info("salvar segurado");
 
-        GestaoSysHealthCadastroEntity entity = repositoryCadastro.findByCompetencia(cadastro.getCompetencia());
-        if (entity != null)
-            entity.setEmpresa(cadastro.getEmpresa());
-
-        repositoryCadastro.save(new GestaoSysHealthCadastroEntity(cadastro));
+        GestaoSysHealthCadastroEntity dto = GestaoSysHealthCadastroEntity.fromJson(cadastro.toJson());
+        repositoryCadastro.save(dto);
 
         log.info("segurado salvo!");
     }
@@ -65,13 +58,9 @@ public class GestaoSysHealthOutMongodbServiceHandler implements GestaoSysHealthO
     public void salvar(Sinistro sinistro) {
         log.info("salvar sinistro");
 
-        GestaoSysHealthSinistroEntity entity = repositorySinistro.find(sinistro.getCompetencia());
-        if (entity != null) {
-            entity.setEmpresa(sinistro.getEmpresa());
-        }
+        GestaoSysHealthSinistroEntity dto = GestaoSysHealthSinistroEntity.fromJson(sinistro.toJson());
+        repositorySinistro.save(dto);
 
-        repositorySinistro.save(new GestaoSysHealthSinistroEntity(sinistro));
-
-        log.info("segurado sinistro!");
+        log.info("sinistro sinistro!");
     }
 }
