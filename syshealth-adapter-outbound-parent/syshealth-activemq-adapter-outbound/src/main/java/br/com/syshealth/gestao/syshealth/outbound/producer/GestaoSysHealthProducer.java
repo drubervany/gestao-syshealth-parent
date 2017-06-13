@@ -21,6 +21,6 @@ public class GestaoSysHealthProducer implements JmsClient {
 
     @Override
     public void sendContratoIncompleto(Contrato contrato) throws CoreValidationException {
-        this.jmsMessagingTemplate.convertAndSend(this.queue, contrato.toString());
+        this.jmsMessagingTemplate.convertAndSend(this.queue, contrato.toJson());
     }
 }

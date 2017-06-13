@@ -3,6 +3,11 @@ package br.com.syshealth.gestao.syshealth.commons;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import com.google.gson.GsonBuilder;
+
+import br.com.syshealth.commons.dto.Premio;
+import br.com.syshealth.commons.utils.Sistema;
+
 /**
  * @author Danilo.Rubervany
  */
@@ -55,4 +60,11 @@ public class Contrato {
         return contributario;
     }
 
+    public String toJson() {
+        return new GsonBuilder().setDateFormat(Sistema.FORMATO_DATA.getValue()).create().toJson(this);
+    }
+
+    public static Premio fromJson(String json) {
+        return new GsonBuilder().setDateFormat(Sistema.FORMATO_DATA.getValue()).create().fromJson(json, Premio.class);
+    }
 }
